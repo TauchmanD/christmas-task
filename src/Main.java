@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int a  = sc.nextInt();
+        create_head(4);
         create_sphere(4, '–', 5);
         create_sphere(4, '–', 0);
 
@@ -16,11 +16,40 @@ public class Main {
                     double distance = Math.sqrt(Math.pow((x-radius),2)+Math.pow((y-radius),2));
                     if (distance > radius - 0.5 && distance < radius + 0.5) {
                         System.out.print(symbol);
+                    } else if (x%3==0 && y==radius) {
+                        System.out.print("#");
                     } else
                         System.out.print(" ");
                 }
                 System.out.println();
             }
+        }
+    }
+    static void create_head(int radius){
+        int face_width = radius + 1;
+        int face_height = radius - 1;
+        int width = radius*2+1;
+        double face_offset = Math.ceil((2*radius-face_width)/2);
+        for(int i=0; i<width; i++) {
+            if (i > face_offset && i < face_offset + face_width + 2) {
+                System.out.print("_");
+            } else System.out.print(" ");
+        }
+        System.out.println();
+        for(int x=0; x<face_height; x++){
+            for(int y=0; y<width; y++) {
+                if (y == face_offset + 1 || y == face_offset + face_width + 1) {
+                    System.out.print("|");
+                }
+                else if(x==1 && (y==face_offset+Math.ceil(face_width/2)+1 ||
+                        y==face_offset+Math.ceil(face_width/2)+3)){
+                    System.out.print("X");
+                } else if (x==face_height-1 && (y>=face_offset+Math.ceil(face_width/2)+1 &&
+                        y<=face_offset+Math.ceil(face_width/2)+3)) {
+                    System.out.print("~");
+                } else System.out.print(" ");
+            }
+            System.out.println();
         }
     }
 }
