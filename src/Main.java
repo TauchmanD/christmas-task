@@ -2,12 +2,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        create_head(4);
-        create_sphere(4, '–', 5);
-        create_sphere(4, '–', 0);
-
+        int scale = 5;
+        int n_spheres = 2;
+        int knob_dist = 1;
+        create_head(scale);
+        for(int i=0; i<n_spheres; i++) {
+            create_sphere(scale, '–', n_spheres-i-1, knob_dist);
+        }
     }
-    static void create_sphere(int radius, char symbol, int offset){
+    static void create_sphere(int radius, char symbol, int offset, int knob_dist){
         int diameter = radius*2;
         for(int x=0; x<=diameter; x++) {
             if(x<diameter-offset+1)
@@ -16,7 +19,7 @@ public class Main {
                     double distance = Math.sqrt(Math.pow((x-radius),2)+Math.pow((y-radius),2));
                     if (distance > radius - 0.5 && distance < radius + 0.5) {
                         System.out.print(symbol);
-                    } else if (x%3==0 && y==radius) {
+                    } else if (x%knob_dist==0 && y==radius) {
                         System.out.print("#");
                     } else
                         System.out.print(" ");
