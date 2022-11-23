@@ -2,9 +2,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int scale = 5;
-        int n_spheres = 2;
-        int knob_dist = 1;
+        System.out.print("Velikost: ");
+        int scale = sc.nextInt();
+        System.out.print("Počet koulí: ");
+        int n_spheres = sc.nextInt();
+        System.out.print("Distribuce knoflíků: ");
+        int knob_dist = sc.nextInt();
         create_head(scale);
         for(int i=0; i<n_spheres; i++) {
             create_sphere(scale, '–', n_spheres-i-1, knob_dist);
